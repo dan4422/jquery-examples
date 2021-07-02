@@ -11,6 +11,25 @@
 
     Make sure you add a "document ready" block.
     */
+
+    $(document).ready(function() {
+      // listen for clicks
+      const $button = $('#the-button')
+      $button.on('click', function() {
+        // update the text of the paragraph
+        const $message = $('#the-message')
+        $message.text('You clicked me!')
+        // update the text of the button
+        $button.text('Click again?')
+      })
+
+      // solution using just selectors
+      // $('#the-button').on('click', function() {
+      //   $('#the-message').text('You clicked me!')
+      //   $('#the-button').text('Click again?')
+      // })
+
+    })
     </script>
   </head>
   <body>

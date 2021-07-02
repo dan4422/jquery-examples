@@ -8,12 +8,21 @@
     /*
     Make it so that when you click on one of the links on this page, instead of
     navigating the browser to that page, it renders that page in the iframe
-    below. Set the iframe's `src` attribute to a URL will cause it to render the
-    page. You will need to show the iframe too since it is currently hidden.
+    below. Setting the iframe's `src` attribute to a URL will cause it to render
+    the page. You will need to show the iframe too since it is currently hidden.
     HINT: Lookup .attr()
     */
     $(function() {
-      // Write code here
+      // add a click listener to ALL the a tags (take THAT vanilla JS!)
+      $('a').on('click', (e) => {
+        // stop link from doing it's thing (default behavior is to visit link)
+        e.preventDefault()
+        // get the href off the target of the click event (whichever link was
+        // clicked becomes e.target)
+        const url = $(e.target).attr('href')
+        // set the src attribute of the iframe and show it
+        $('#iframe').attr('src', url).show();
+      })
     });
     </script>
   </head>

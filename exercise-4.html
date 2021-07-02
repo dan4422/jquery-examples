@@ -11,7 +11,23 @@
     HINT: lookup .val()
     */
     $(function () {
-      // write your code here
+      // when the clear button is clicked
+      const $clear = $('#clear-button')
+      const $textfield = $('#text-field')
+      $clear.on('click', function() {
+        // clear the text field
+        $textfield.val('')
+      })
+      // When the save button is clicked
+      $('#save-button').on('click', function() {
+        // take the text value inside the text field
+        const text = $textfield.val()
+        // and append a new <li> element to the #log
+          // with the entered text value.
+        $(`<li>${text}</li>`).appendTo('#log')
+        // clear text after save
+        $textfield.val('')
+      })
     });
     </script>
   </head>
