@@ -13,6 +13,73 @@
     2. Add the ability to check off tasks (add a checkbox that changes the style of the list item)
     3. Add the ability to edit an existing task (add an edit button that enables a text input, and a save button to confirm)
     */
+    $(document).ready(function(){
+      // find all relevant elements
+      const $input = $('#description')
+      const $add = $('#add-button')
+      const $list = $('#todo-list')
+
+      // 0. add todo item
+      $add.on('click', () => {
+        // if the input is empty
+        if (!$input.val()) {
+          // do nothing
+          return;
+        }
+        // add a new list item to the list
+        $list.append(`<li>
+          <input type="checkbox">
+          <span class="content">${$input.val()}</span>
+          <button class="edit">e</button>
+          <button class="delete">x</button>
+        </li>`)
+        // clear input
+        $input.val("")
+      })
+
+      // 1. add delete button
+      $list.on('click', '.delete', (e) => {
+        // the target of the event is the button, and the parent is the list
+        // item, so remove it.
+        $(e.target).parent().remove();
+      })
+
+      // 2. add a checkbox to 'complete' the item
+      // target the 'change' event and look for the checkbox element
+      $list.on('change', 'li [type=checkbox]', (e) => {
+        // checkbox is the target of the event
+        const $checkbox = $(e.target)
+        // if the checkbox is now checked
+        if ($checkbox.is(':checked')) {
+          // add a complete class
+          $checkbox.parent().addClass('complete')
+        } else {
+          // else remove it
+          $checkbox.parent().removeClass('complete')
+        }
+      })
+
+      // 3. Add the ability to edit an existing task
+      $list.on('click', '.edit', (e) => {
+        // find the content span that is a sibling of the edit button
+        const $content = $(e.target).siblings('.content')
+        // hide the content
+        $content.hide();
+        // create a new edit form
+        const $editForm = $(`<form style="display: inline-block;"><input value="${$content.text()}"><button type="submit">save</button></form`)
+        // add it to the page, after the content, then add a submit event listenet
+        $editForm.insertAfter($content).on('submit', (e) => {
+          // stop the form from refreshing the page
+          e.preventDefault();
+          // find the text that is in the one form input
+          const newText = $editForm.find('input').val()
+          // use that text to update the content span and show it at the same time
+          $content.text(newText).show()
+          // remove the edit from from the page entirely
+          $editForm.remove();
+        })
+      })
+    })
     </script>
     <style>
     #wrapper {
@@ -23,6 +90,11 @@
     #description, #search, #todo-list {
       font-size: 1.5em;
     }
+
+    /* complete class added so that we can strike out the items */
+    .complete {
+      text-decoration: line-through;
+    }
     </style>
   </head>
   <body>
@@ -30,7 +102,13 @@
       <input id="description" type="text" name="description">
       <button id="add-button">Add Task</button>
       <ul id="todo-list">
-        <li>Feed the cat</li>
+        <!-- list item code has contents updated with buttons, and inputs -->
+        <li>
+          <input type="checkbox">
+          <span class="content">Feed the cat</span>
+          <button class="edit">e</button>
+          <button class="delete">x</button>
+        </li>
       </ul>
     </div>
   </body>
