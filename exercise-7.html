@@ -13,6 +13,39 @@
     2. Add the ability to check off tasks (add a checkbox that changes the style of the list item)
     3. Add the ability to edit an existing task (add an edit button that enables a text input, and a save button to confirm)
     */
+    $(function () {
+      // write your code here
+      $('#add-button').on('click', (e) => {
+        $('<li>').appendTo('#todo-list').text($('#description').val()).append('<button class="remove">X</button>').append("<input class='checkbox' type='checkbox'>").append('<button class="edit" type="submit">Edit</button>')
+
+        $('.remove').on('click', (e) => {
+            $(e.target).parent().remove()
+          })
+
+        $('.checkbox').on('click', (e) => {
+          if (e.target.checked) {
+            $(e.target).parent().css({
+              'text-decoration':'line-through'})
+          } else {
+            $(e.target).parent().css('text-decoration','')
+          }
+        })
+
+        $('.edit').on('click', (e) => {
+          $(e.target).parent().append('<input class="editInput">').append('<button class="save" type="submit">Save</button>')
+          $(".save").on('click', (e) => {
+            // $(e.target).parent().text()
+            $(e.target).parent().text($('.editInput').val())
+          })
+        })
+        
+
+        })
+
+      
+
+
+    });
     </script>
     <style>
     #wrapper {
@@ -28,7 +61,7 @@
   <body>
     <div id="wrapper">
       <input id="description" type="text" name="description">
-      <button id="add-button">Add Task</button>
+      <button type="submit" id="add-button">Add Task</button>
       <ul id="todo-list">
         <li>Feed the cat</li>
       </ul>

@@ -14,14 +14,39 @@
     */
     $(function() {
       // Write code here
+      // $('.bouncy').attr("href", "")
+      $(".bouncy").on('click', (e) => {
+        e.preventDefault()
+        $('#iframe').attr({
+          src: e.target.href,
+          style: "display: block"
+        })
+      })
+
+      $(".waves").on('click', (e) => {
+        e.preventDefault()
+        $('#iframe').attr({
+          src: e.target.href,
+          style: "display: block"
+        })
+      })
+
+      $(".cubes").on('click', (e) => {
+        e.preventDefault()
+        $('#iframe').attr({
+          src: e.target.href,
+          style: "display: block"
+        })
+      })
+
     });
     </script>
   </head>
   <body>
     <ul>
-      <li><a href="https://codepen.io/jkantner/embed/VwbLajq">Bouncy</a></li>
-      <li><a href="https://codepen.io/goodkatz/embed/LYPGxQz">Waves</a></li>
-      <li><a href="https://codepen.io/toshiya-marukubo/embed/vYmEpyj">Cubes</a></li>
+      <li><a class="bouncy" href="https://codepen.io/jkantner/embed/VwbLajq">Bouncy</a></li>
+      <li><a class="waves" href="https://codepen.io/goodkatz/embed/LYPGxQz">Waves</a></li>
+      <li><a class="cubes" href="https://codepen.io/toshiya-marukubo/embed/vYmEpyj">Cubes</a></li>
     </ul>
     <iframe id="iframe" src="" width="800" height="480" style="display: none"></iframe>
   </body>

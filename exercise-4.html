@@ -12,11 +12,18 @@
     */
     $(function () {
       // write your code here
+      $('#clear-button').on('click', (e) => {
+        $("#text-field").val("")
+      })
+      
+      $('#save-button').on('click', (e) => {
+        $('<li>').appendTo("#log").text($("#text-field").val())
+      })
     });
     </script>
   </head>
   <body>
-    <input id="text-field" type="text" name="text">
+    <input id="text-field" type="text" name="text" placeholder="hi">
     <button id="clear-button">Clear</button>
     <button id="save-button">Save</button>
     <ul id="log">
